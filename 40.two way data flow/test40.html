@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/react.js"></script>
+    <script src="../js/react-dom.js"></script>
+    <script src="../../bower_components/react/react-with-addons.js"></script>
+    <script src="../js/JSXTransformer.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/jsx">
+        var Easybox = React.createClass({
+           mixins:[React.addons.LinkedStateMixin],
+           getInitialState:function(){
+               return({
+                  message:'React is awesome!!!',
+                  isAwesome:true
+               });
+           },
+           render:function(){
+               return(
+                       <div>
+                           <h3>我想说：{this.state.message}</h3>
+                           <h4>React真的很好用吗？{this.state.isAwesome?'真的好用啊！！！':'一般般吧。。。'}</h4>
+                           <input type="text" valueLink={this.linkState('message')}/>
+                       </div>
+               );
+           }
+        });
+
+        ReactDOM.render(
+                <Easybox />,
+                document.getElementById('app')
+        );
+    </script>
+</body>
+</html>

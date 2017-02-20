@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/react.js"></script>
+    <script src="../js/react-dom.js"></script>
+    <script src="../js/JSXTransformer.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/jsx">
+        var MyClick = React.createClass({
+            getInitialState:function(){
+                return({
+                    inputValue:'input value',
+                    selectValue:'A',
+                    textareaValue:'some text here...',
+                    radioValue:'C',
+                    checkValue:[]
+                })
+            },
+            handleSubmit:function(e){
+                e.preventDefault();
+                //console.log(this.refs['goodInput'].value);
+                //console.log(ReactDOM.findDOMNode(this.refs.goodInput).value);
+                var formData = {
+                    //input:this.refs['goodInput'].value,
+                    select:this.refs['goodSelect'].value,
+                    textarea:this.refs['goodTextarea'].value,
+                    check:this.state.checkValue,
+                    radio: this.state.radioValue
+                }
+                console.log('the data\'s result is:')
+                console.log(formData);
+                this.refs.goodRadio.saySomething();
+            },
+            handleRadio:function(e){
+                this.setState({
+                    radioValue: e.target.value
+                })
+            },
+            handleCheck:function(e){
+                var checkValue1 = this.state.checkValue.slice();       //新建一个新的数组
+                var itemcheck = e.target.value;                       //当前用户所选择的项
+                var index = checkValue1.indexOf(itemcheck);
+                if(index==-1){                                        //判断这个所选择的项在数组中占的位置
+                    checkValue1.push(itemcheck);                       //当这个选项不存在的话，就直接插入到新数组中
+                }else{
+                    checkValue1.splice(index,1);                     //如果这个选项之前存在的话，就从数组中删除这个选项
+                }
+
+                this.setState({
+                    checkValue: checkValue1,
+                })
+            },
+            render:function(){
+                return(
+                        <form onSubmit={this.handleSubmit}>
+                            <input type="text" ref={function(comp){ReactDOM.findDOMNode(comp).focus()}} defaultValue={this.state.inputValue}/><br/>
+                            <select ref="goodSelect" defaultValue={this.state.selectValue}>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                            </select>
+                            <br/>
+                            <p>radio button:</p>
+                            <RadioBtn ref="goodRadio" handleRadio1={this.handleRadio}/>
+                            <p>checkbox:</p>
+                            <CheckBtn handleCheck1={this.handleCheck}/>
+                            <textarea ref="goodTextarea" defaultValue={this.state.textareaValue}></textarea>
+                            <br/>
+                            <button type="submit">提交</button>
+                        </form>
+                );
+            }
+        });
+
+        var RadioBtn = React.createClass({
+            saySomething:function(){
+                alert('哈哈哈哈，我写出来啦。。')
+            },
+            render:function(){
+                return(
+                <div>
+                    A<input onChange={this.props.handleRadio1} name="goodRadio" type="radio" defaultChecked value="A" />
+                    B<input onChange={this.props.handleRadio1} name="goodRadio" type="radio" value="B" />
+                    C<input onChange={this.props.handleRadio1} name="goodRadio" type="radio" value="C" />
+                </div>);
+            }
+        });
+
+        var CheckBtn = React.createClass({
+            render:function(){
+                return(
+                <div>
+                    A<input onChange={this.props.handleCheck1} name="goodCheck" type="checkbox" value="A" />
+                    B<input onChange={this.props.handleCheck1} name="goodCheck" type="checkbox" value="B" />
+                    C<input onChange={this.props.handleCheck1} name="goodCheck" type="checkbox" value="C" />
+                </div>);
+            }
+        })
+
+        var my = ReactDOM.render(
+                <MyClick />,
+                document.getElementById('app'),
+                function(){
+                    console.log('渲染完成啦！！！哈哈哈！！')
+                }
+        );
+    </script>
+</body>
+</html>

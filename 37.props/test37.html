@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/react.js"></script>
+    <script src="../js/react-dom.js"></script>
+    <script src="../js/JSXTransformer.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script type="text/jsx">
+    var MessageBar = React.createClass({
+        getInitialState:function(){
+            return({
+                subMessage:[
+                        '我要去搬砖了',
+                        '我会花式搬砖',
+                        '不说了，工头叫我了，我还有两百块砖要搬。。'
+                ]
+
+            });
+        },
+        render:function(){
+            return(
+                    <div>
+                        <h1>{this.props.title}</h1>
+                        <SubMessage messages={this.state.subMessage}/>
+                    </div>
+            );
+        }
+    });
+
+    var SubMessage = React.createClass({
+        propTypes:function(){
+          messages:React.PropTypes.array.isRequired
+        },
+        getDefaultProps:function(){
+            return({
+                messages:['为啥现在越来越多的人开始搬砖啦']
+            });
+        },
+        render:function(){
+            var arr=[];
+            this.props.messages.forEach(function(item,index){
+                arr.push(
+                        <p key={index}>码农说：{item}</p>
+                )
+            });
+            return(
+                    <div>{arr}</div>
+            );
+        }
+    });
+
+    var title='你好，世界（来自props的数据哦）';
+    var my = ReactDOM.render(
+            <MessageBar title={title}/>,
+            document.getElementById('app'),
+            function(){
+                console.log('渲染完成啦！！！哈哈哈！！')
+            }
+    );
+
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/react.js"></script>
+    <script src="../js/react-dom.js"></script>
+    <script src="../js/JSXTransformer.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/jsx">
+        var MessageBar = React.createClass({
+            alertHahh:function(){
+                alert('你刚刚点了我一下！')
+            },
+            render:function(){
+                var arr = [];
+                for(var i=0; i < 10; i++){
+                    arr.push(
+                            <SubMessage key={i}/>
+                    );
+                }
+                return(
+                        <div>
+                            <h1 onClick={this.alertHahh}>你好！世界！！！</h1>
+                            {arr}
+                        </div>
+                );
+            }
+        });
+
+        var SubMessage = React.createClass({
+            render:function(){
+                return(
+                        <div>
+                            <h3>哈哈哈，我正在使用React哟！</h3>
+                            <Footer />
+                        </div>
+                );
+            }
+        });
+
+        var Footer = React.createClass({
+           render:function(){
+               return(
+                       <small>用React写组件嵌套！棒棒哒！</small>
+               );
+           }
+        });
+
+        ReactDOM.render(
+                <MessageBar />,
+                document.getElementById('app'),
+                function(){
+                    console.log('渲染完成啦！！！哈哈哈！！')
+                }
+
+        );
+
+    </script>
+</body>
+</html>

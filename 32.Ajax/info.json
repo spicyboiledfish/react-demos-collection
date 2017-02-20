@@ -1,0 +1,24 @@
+[
+  {
+    "username": "Alice",
+    "age":18,
+    "birthday":"1995-01-01",
+    "job":"IT",
+    "isMarried":false
+  },
+  {
+    "username": "Charles",
+    "age":19,
+    "birthday":"1993-04-05",
+    "job":"Doctor",
+    "isMarried":true
+  },
+  {
+    "username": "Vincent",
+    "age":22,
+    "birthday":"1996-09-01",
+    "job":"Cooker",
+    "isMarried":false
+  }
+
+]

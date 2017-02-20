@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/react.js"></script>
+    <script src="../js/react-dom.js"></script>
+    <script src="../js/JSXTransformer.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/jsx">
+        var MyClick = React.createClass({
+            getInitialState:function(){
+                return({
+                    inputValue:'input value',
+                    radioValue:'B',
+                    selectValue:'A',
+                    textareaValue:'some text here...'
+                })
+            },
+            handleInput:function(e){
+                this.setState({
+                    inputValue: e.target.value,
+                })
+            },
+            handleSelect:function(e){
+                this.setState({
+                    selectValue: e.target.value,
+                })
+            },
+            handleTextarea:function(e){
+                this.setState({
+                    textareaValue: e.target.value,
+                })
+            },
+            handleSubmit:function(e){
+                e.preventDefault();
+                console.log('form submitting.....')
+                console.log(e.target);
+            },
+            render:function(){
+                return(
+                        <form onSubmit={this.handleSubmit}>
+                            <input type="text" value={this.state.inputValue} onChange={this.handleInput}/><br/>
+                            <select value={this.state.selectValue} onChange={this.handleSelect}>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                            </select>
+                            <br/>
+                            <p>radio button!!!</p>
+                            <input name="goodRadio" type="radio" defaultChecked value="A" />
+                            <input name="goodRadio" type="radio" value="B" />
+                            <input name="goodRadio" type="radio" value="C" />
+                            <br/>
+                            <input name="goodCheck" type="checkbox" value="A" />
+                            <input name="goodCheck" type="checkbox" defaultChecked value="B" />
+                            <input name="goodCheck" type="checkbox" value="C" />
+                            <br/>
+                            <textarea value={this.state.textareaValue} onChange={this.handleTextarea}></textarea>
+                            <br/>
+                            <button type="submit">按钮</button>
+                        </form>
+                );
+            }
+        });
+
+        var my = ReactDOM.render(
+                <MyClick />,
+                document.getElementById('app'),
+                function(){
+                    console.log('渲染完成啦！！！哈哈哈！！')
+                }
+        );
+    </script>
+</body>
+</html>
